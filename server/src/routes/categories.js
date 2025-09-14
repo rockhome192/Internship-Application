@@ -1,16 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const { q } = require('../db'); // ฟังก์ชัน query ของคุณ
-
-// GET /api/categories
-router.get('/', async (req, res) => {
-  try {
-    const rows = await q('SELECT id, name FROM categories ORDER BY name');
-    res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Database error' });
-  }
+import { Router } from 'express';
+import { q } from '../db.js';
+export const categoriesRouter = Router();
+categoriesRouter.get('/', async (_req, res) => {
+  const { rows } = await q(`SELECT * FROM categories WHERE user_id=1 ORDER BY name`);
+  res.json(rows);
 });
-
-module.exports = router;
+categoriesRouter.post('/', async (req, res) => {
+  const { name } = req.body;
+  await q(`INSERT INTO categories (user_id, name) VALUES (1, ?)`, [name]);
+  const { rows } = await q(`SELECT * FROM categories WHERE user_id=1 AND name=? ORDER BY id DESC LIMIT 1`, [name]);
+  res.status(201).json(rows[0]);
+});
