@@ -2,7 +2,7 @@
   "name": "expense-tracker-server-mysql",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --watch src --exec node src/index.js",
+    "dev": "nodemon src/index.js",
     "start": "node src/index.js"
   },
   "dependencies": {
