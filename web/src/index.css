@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* เพิ่ม utility เล็กน้อยสำหรับ card & table */
+.card { @apply bg-white rounded-2xl shadow p-5; }
+.table { @apply w-full border-collapse; }
+.table thead th { @apply text-left text-gray-600 border-b border-gray-200 p-3; }
+.table tbody td { @apply border-b border-gray-100 p-3; }
+.btn { @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition; }
+.btn-primary { @apply bg-blue-600 text-white hover:bg-blue-700; }
+.btn-ghost { @apply bg-gray-100 text-gray-800 hover:bg-gray-200; }
+.input { @apply border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500; }
+.select { @apply border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500; }
+.label { @apply text-sm text-gray-600; }

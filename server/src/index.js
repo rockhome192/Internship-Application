@@ -1,0 +1,17 @@
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { expensesRouter } from './routes/expenses.js';
+import { categoriesRouter } from './routes/categories.js';
+import { statsRouter } from './routes/stats.js';
+dotenv.config();
+const app = express();
+const allowed = (process.env.ALLOWED_ORIGINS || '').split(',').filter(Boolean);
+app.use(cors({ origin: (origin, cb) => cb(null, allowed.length ? allowed : true), credentials: true }));
+app.use(express.json());
+app.use('/api/expenses', expensesRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/stats', statsRouter);
+app.get('/api/health', (_req, res) => res.json({ ok: true }));
+const port = Number(process.env.PORT || 3001);
+app.listen(port, () => console.log(`API running on :${port}`));
